@@ -28,14 +28,13 @@ app.all('/player/growid/login/validate', (req, res) => {
     const growId = req.body.growId;
     const password = req.body.password;
 
-    // Respond with the token in plain JSON, no base64 encoding
-    res.send({
-        status: "success",
-        message: "Account Validated.",
-        token: { _token, growId, password },
-        url: "",
-        accountType: "growtopia"
-    });
+    const token = Buffer.from(
+        `_token=${_token}&growId=${growId}&password=${password}`,
+    ).toString('base64');
+
+    res.send(
+        `{"status":"success","message":"Account Validated.","token":"${token}","url":"","accountType":"growtopia"}`,
+    );
 });
 
 app.post('/player/validate/close', function (req, res) {
