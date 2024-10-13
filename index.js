@@ -42,10 +42,10 @@ app.post('/player/validate/close', function (req, res) {
 });
 
 app.post('/player/register', (req, res) => {
-    const { username, email, password } = req.body;
+    const { name, email, pass } = req.body;
 
     // Validate the input
-    if (!username || !email || !password) {
+    if (!name || !email || !pass) {
         return res.status(400).json({ status: 'error', message: 'All fields are required.' });
     }
 
@@ -54,9 +54,9 @@ app.post('/player/register', (req, res) => {
 
     // Create the user object
     const userData = {
-        username: username,
+        name: name,
         email: email,
-        password: password // Be sure to hash the password in a real application!
+        pass: pass // Be sure to hash the password in a real application!
     };
 
     // Write the user data to a JSON file
